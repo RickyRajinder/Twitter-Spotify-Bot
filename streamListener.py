@@ -29,7 +29,7 @@ class StreamListener(tweepy.StreamListener):
             msg = (
             "@%s Hello, I couldn't find a track with your specified criteria. Please be more specific :)" % (usr))
             try:
-                st = api.update_status(msg, id_str)
+                api.update_status(msg, id_str)
             except tweepy.error.TweepError:
                 pass
         searchCriteria = 'track: ' + tweetTxt
@@ -41,7 +41,7 @@ class StreamListener(tweepy.StreamListener):
         msg = ("@%s Hello, I found this track: " % (usr))
         msg = msg + link
         try:
-            st = api.update_status(msg, id_str)
+            api.update_status(msg, id_str)
         except tweepy.error.TweepError:
             pass
 
