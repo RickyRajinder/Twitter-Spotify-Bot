@@ -19,21 +19,33 @@ class StreamListener(tweepy.StreamListener):
         text = status.text
         usr = status.user.screen_name
         id_str = status.id_str
-        #if status.retweeted_status:
-         #   return
+        if hasattr(status, 'retweeted_status'):
+            return
         tweetTxt = text.lower()
         tweetTxt = tweetTxt.replace('@spotifysearch', '')
-        print(usr + ": " + tweetTxt)
+        print("@" + usr + ": " + tweetTxt)
         if len(tweetTxt) <= 1:
+            print("Nothing to search")
             msg = (
-            "@%s Hello, I couldn't find a track with your specified criteria. Please be more specific :)" % (usr))
+            "@%s Hello, I couldn't find a track with your specified criteria. Please be more specific \U0001f604" % (usr))
             try:
                 api.update_status(msg, id_str)
             except tweepy.error.TweepError:
                 pass
+            return
         searchCriteria = 'track: ' + tweetTxt
         print(searchCriteria)
         spotifyRes = spotipy.search(searchCriteria, limit=1, offset=0, type='track')
+        print(spotifyRes)
+        if spotifyRes['tracks']['total'] == 0:
+            print('NADA')
+            msg = (
+                "@%s Hello, I couldn't find anything on Spotify with your specified criteria. Sorry \U0001f604" % (usr))
+            try:
+                api.update_status(msg, id_str)
+            except tweepy.error.TweepError:
+                pass
+            return
         spotifyRes = spotifyRes['tracks']['items'][0]['external_urls']
         link = spotifyRes.get('spotify')
         print(link)
