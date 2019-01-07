@@ -1,7 +1,6 @@
 import tweepy
 import spotipy
 import spotipy.oauth2 as oauth2
-import itertools
 
 from config import *
 
@@ -24,7 +23,7 @@ class StreamListener(tweepy.StreamListener):
          #   return
         tweetTxt = text.lower()
         tweetTxt = tweetTxt.replace('@spotifysearch', '')
-        print(tweetTxt)
+        print(usr + ": " + tweetTxt)
         if len(tweetTxt) <= 1:
             msg = (
             "@%s Hello, I couldn't find a track with your specified criteria. Please be more specific :)" % (usr))
