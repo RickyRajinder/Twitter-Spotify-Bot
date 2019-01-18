@@ -8,8 +8,7 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, wait_on_rate_limit_notify=True)
 
-credentials = oauth2.SpotifyClientCredentials(client_id='000bbd9b28c64545a3afa3e1356bee4a',
-    client_secret='4314837db2434871bc84e75451d972de')
+credentials = oauth2.SpotifyClientCredentials=()
 token = credentials.get_access_token()
 spotipy = spotipy.Spotify(auth=token)
 
