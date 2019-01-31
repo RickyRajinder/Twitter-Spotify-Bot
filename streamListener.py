@@ -2,13 +2,16 @@ import tweepy
 import spotipy
 import spotipy.oauth2 as oauth2
 
+
 from config import *
+from settings import *
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, wait_on_rate_limit_notify=True)
 
-credentials = oauth2.SpotifyClientCredentials=(client_id,client_secret)
+credentials = oauth2.SpotifyClientCredentials(client_id=CLIENT_ID,
+                                                         client_secret=CLIENT_SECRET)
 token = credentials.get_access_token()
 spotipy = spotipy.Spotify(auth=token)
 
@@ -59,3 +62,6 @@ class StreamListener(tweepy.StreamListener):
         if status_code == 420:
             return False
 
+    def on_exception(self, exception):
+        print(exception)
+        return

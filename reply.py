@@ -10,7 +10,7 @@ api = tweepy.API(auth, wait_on_rate_limit_notify=True)
 Listener = streamListener.StreamListener()
 stream = tweepy.Stream(auth=api.auth, listener= Listener)
 
-#def streamSearch():
+print("Streaming...")
 stream.filter(track=['SpotifySearch', 'spotifysearch', 'SPOTIFYSEARCH', 'spotifySearch', 'SpotifySearch'])
 
 #streamSearch()
