@@ -3,11 +3,10 @@ import spotipy
 import spotipy.oauth2 as oauth2
 
 
-from config import *
 from settings import *
 
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
+auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth, wait_on_rate_limit_notify=True)
 
 credentials = oauth2.SpotifyClientCredentials(client_id=CLIENT_ID,
